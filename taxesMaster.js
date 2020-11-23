@@ -108,15 +108,26 @@ export  default class  taxesMaster extends Component {
         this.setState({
             errors: errors
         });
+     
+        var taxname =   this.state.input.taxname;
+        var taxperc= this.state.input.taxperc;
+        var description = this.state.input.description;
+       
+        
+        var perc =parseFloat(this.state.input.taxperc);  
+        console.log("taxname:"+ taxname)
  const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({taxname: this.state.input.taxname,taxperc:this.state.input.taxperc,description:this.state.input.description })
+        body: JSON.stringify({taxname: taxname,taxperc:perc,description: description })
     };
     fetch('http://148.72.208.43:5010/taxtype', requestOptions)
-        .then(response => response.json())
-        .then(data => this.setState({ postId: data.id }));
-console.log(this.state.input);
+        .then(response => console.log(response.json()))
+        
+        //.then(data => this.setState({ postId: data.id,taxname:this.state.input.taxname,taxper:this.state.input.taxperc,description:this.state.input.description }));
+console.log(this.state.input.taxname);
+console.log(this.state.input.taxperc);
+console.log(this.state.input.description);
         return isValid;
     }
 
